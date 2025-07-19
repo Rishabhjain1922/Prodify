@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:controller="main.java.productivity.controller.DashboardController"
+      xmlns:fx="http://javafx.com/fxml" spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+
+    <HBox spacing="10" alignment="TOP_RIGHT">
+        <Label fx:id="welcomeLabel" text="Welcome!" style="-fx-font-size: 16px;" />
+        <Button text="Logout" onAction="#handleLogout"
+                style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+    </HBox>
+
+    <TextField fx:id="titleField" promptText="Task Title" />
+    <TextArea fx:id="descField" promptText="Task Description" />
+    <Button text="Add Task" onAction="#handleAddTask" />
+
+    <ScrollPane fitToWidth="true">
+        <VBox fx:id="taskContainer" spacing="10" />
+    </ScrollPane>
+</VBox>
+
