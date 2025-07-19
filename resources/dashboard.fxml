@@ -2,21 +2,57 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:controller="main.java.productivity.controller.DashboardController"
-      xmlns:fx="http://javafx.com/fxml" spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+<VBox fx:id="dashboardContainer" fx:controller="main.java.productivity.controller.DashboardController"
+      xmlns:fx="http://javafx.com/fxml" spacing="20" styleClass="dashboard-container">
 
-    <HBox spacing="10" alignment="TOP_RIGHT">
-        <Label fx:id="welcomeLabel" text="Welcome!" style="-fx-font-size: 16px;" />
-        <Button text="Logout" onAction="#handleLogout"
-                style="-fx-background-color: #e74c3c; -fx-text-fill: white;" />
+    <!-- Header with welcome and logout -->
+    <HBox alignment="CENTER_LEFT" spacing="20">
+        <Label fx:id="welcomeLabel" styleClass="welcome-label" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Logout" onAction="#handleLogout" styleClass="secondary-button" />
     </HBox>
 
-    <TextField fx:id="titleField" promptText="Task Title" />
-    <TextArea fx:id="descField" promptText="Task Description" />
-    <Button text="Add Task" onAction="#handleAddTask" />
+    <!-- Task input section -->
+    <VBox styleClass="task-input-container">
+        <Label text="Add New Task" styleClass="header" />
 
-    <ScrollPane fitToWidth="true">
-        <VBox fx:id="taskContainer" spacing="10" />
-    </ScrollPane>
+        <GridPane hgap="10" vgap="10">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="30" />
+                <ColumnConstraints percentWidth="70" />
+            </columnConstraints>
+
+            <rowConstraints>
+                <RowConstraints prefHeight="35" />
+                <RowConstraints prefHeight="35" />
+                <RowConstraints prefHeight="35" />
+                <RowConstraints prefHeight="35" />
+            </rowConstraints>
+
+            <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+            <TextField fx:id="titleField" promptText="Enter task title" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+            <Label text="Description:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+            <TextArea fx:id="descField" promptText="Enter task description" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+            <Label text="Priority:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+            <ComboBox fx:id="priorityCombo" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+            <Button text="Add Task" onAction="#handleAddTask" styleClass="add-button"
+                    GridPane.rowIndex="3" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+        </GridPane>
+    </VBox>
+
+    <!-- Task list section -->
+    <VBox styleClass="task-list-container">
+        <Label text="Your Tasks" styleClass="header" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+            <VBox fx:id="taskContainer" spacing="10" />
+        </ScrollPane>
+    </VBox>
+
+    <!-- Status bar -->
+    <HBox styleClass="status-bar" alignment="CENTER_RIGHT">
+        <Label fx:id="taskCountLabel" text="0 tasks" />
+    </HBox>
 </VBox>
-
